@@ -1,0 +1,12 @@
+---
+# vars file for wordpress
+
+w_url: https://wordpress.org/wordpress-5.1.1.tar.gz
+dest_url: /tmp
+dest_url2: /tmp/wordpress
+DocRoot: /var/www/html
+owner_name:  apache
+group_owner:  apache
+service_name: httpd
+
+

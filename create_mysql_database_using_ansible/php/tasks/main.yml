@@ -1,0 +1,17 @@
+---
+# tasks file for php
+
+- name: Install php
+  yum:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - php
+      - php-gd
+      - php-mysql
+
+- name: copy info.php
+  copy:
+     src: files/info.php
+     dest: /var/www/html/info.php
+     remote_src: no
