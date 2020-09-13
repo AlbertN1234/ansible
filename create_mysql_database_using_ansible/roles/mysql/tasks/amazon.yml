@@ -1,0 +1,28 @@
+- name: Install mysql on Amazon
+  yum: name={{ amazon_sql }}  state=present
+
+- name: Start mysql in Amazon ec2
+  service: name={{ amazon_sql }}    state=started
+  when:  ansible_distribution == 'Amazon'
+
+  ## This following dependency need to be installed ##
+- name: Install ansible package dependency for mysql
+  yum: name={{ mysql_package }}   state=present
+
+- name: COpy cnf file to target server
+  COPY:
+     src: /files/my.cnf
+     dest: /root/.my.cnf
+     remote_src: no
+
+- name: Create database
+  mysql_db:
+     name: {{ db_name }}
+     state: present
+
+- name: Create database user
+  mysql_user:
+     name: {{ db_user }}
+     password: {{ db_pass }}
+     priv: '*.*:ALL'
+     state: present

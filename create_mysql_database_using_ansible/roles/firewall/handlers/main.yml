@@ -1,0 +1,5 @@
+---
+# handlers file for firewall
+
+- name: restart Iptables
+  service: name={{ iptables_service }}   state=restarted
